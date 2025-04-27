@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List Web App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="todo-app-container">
+        <div class="input-container">
+            <h2>To Do List</h2>
+            <form>
+            <input type="text" id="title" placeholder="Title" required />
+            <textarea id="description" placeholder="Description" required></textarea>
+            <button id="saveBtn">ADD</button>
+        </form>
+        </div>
+    
+        <div class="todo-list" id="items">
+            <div class="to-do-list-heading">
+                <h2>Title</h2>
+                <h2>Description</h2>
+                <h2>Delete</h2>
+            </div>
+    
+            
+            <!-- TODO Items will be here -->
+        </div>
+        <div></div>
+    </div>
+    
+
+    <script lang="javascript">
+        
+        
+        document.getElementById('saveBtn').addEventListener('click', addTodo);
+
+        function truncateText(text, maxLength) {
+    return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
+}
+
+        function addTodo() {
+            const title = document.getElementById('title').value;
+            const description = document.getElementById('description').value;
+
+            if (!title || !description) {
+                alert('Please fill out all fields.');
+                return;
+            }
+
+            const todoItem = document.createElement('div');
+            todoItem.classList.add('todo-item');
+            
+
+            todoItem.innerHTML = `
+                <div>
+                    <strong>${title}</strong><br>
+                    
+                </div>
+                <small>"${truncateText(description, 30)}"</small>
+                <button class="delete-btn">X</button> `;
+
+            document.getElementById('items').appendChild(todoItem);
+
+        
+            document.getElementById('title').value = '';
+            document.getElementById('description').value = '';
+
+            todoItem.querySelector('.delete-btn').addEventListener('click', () => {
+                todoItem.remove();
+            });
+        }
+    </script>
+</body>
+</html>

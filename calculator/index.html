@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Calculator</title>
+</head>
+<body>
+    
+    <div class="calculator">
+        <h1 class="heading">CALCULATOR</h1>
+        <input type="text" id="display" disabled aria-label="Calculator display">
+        <div class="buttons">
+            <button class="btn" onclick="appendToDisplay('(')">(</button>
+            <button class="btn" onclick="appendToDisplay(')')">)</button>
+            <button class="btn clear" onclick="clearDisplay()">Clear</button>
+            <button class="btn" onclick="deleteLastCharacter()">Del</button>
+            <button class="btn" onclick="appendToDisplay(lastResult)">Ans</button>
+            <button class="btn" onclick="appendToDisplay('7')">7</button>
+            <button class="btn" onclick="appendToDisplay('8')">8</button>
+            <button class="btn small" onclick="appendToDisplay('9')">9</button>
+            <button class="btn" onclick="calculateSquareRoot()">√</button>
+            <button class="btn" onclick="appendToDisplay('%')">%</button>
+            <button class="btn" onclick="appendToDisplay('4')">4</button>
+            <button class="btn" onclick="appendToDisplay('5')">5</button>
+            <button class="btn small" onclick="appendToDisplay('6')">6</button>
+            <button class="btn" onclick="appendToDisplay('/')">/</button>
+            <button class="btn" onclick="appendToDisplay('*')">x</button>
+            <button class="btn" onclick="appendToDisplay('1')">1</button>
+            <button class="btn" onclick="appendToDisplay('2')">2</button>
+            <button class="btn small" onclick="appendToDisplay('3')">3</button>
+            <button class="btn" onclick="appendToDisplay('+')">+</button>
+            <button class="btn" onclick="appendToDisplay('-')">-</button>
+            <button class="btn" onclick="appendToDisplay('.')">.</button>
+            <button class="btn" onclick="appendToDisplay('0')">0</button>
+            <button class="btn enter" onclick="calculateResult()">ENTER</button>
+        </div>
+    </div>
+    <script lang="javascript">
+        let lastResult = null;
+
+        function appendToDisplay(value) {
+            const display = document.getElementById('display');
+            display.value += value;
+        }
+
+        function clearDisplay() {
+            const display = document.getElementById('display');
+            display.value = '';
+            lastResult = null;
+        }
+
+        function deleteLastCharacter() {
+            const display = document.getElementById('display');
+            display.value = display.value.slice(0, -1);
+        }
+
+        function calculateResult() {
+            const display = document.getElementById('display');
+            try {
+                lastResult = Function('"use strict";return (' + display.value + ')')();
+                display.value = lastResult;
+            } catch (error) {
+                display.value = 'Error';
+            }
+        }
+
+        function calculateSquareRoot() {
+            const display = document.getElementById('display');
+            try {
+                const result = Math.sqrt(eval(display.value));
+                lastResult = result;
+                display.value = result;
+            } catch (error) {
+                display.value = 'Error';
+            }
+        }
+    </script>
+</body>
+</html>
