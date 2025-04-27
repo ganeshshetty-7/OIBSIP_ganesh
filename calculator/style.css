@@ -41,7 +41,7 @@ body {
 
 .buttons {
     display: grid;
-    grid-template-columns: repeat(5, 17.5%);
+    grid-template-columns: repeat(5, 17.5%);   
     gap: 10px;
 }
 
