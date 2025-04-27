@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 
 app = Flask(__name__)
 
-app.secret_key = 'your_secret_key_here'
+
 
 # Dictionary to store usernames and passwords
 USERS = {
